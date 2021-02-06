@@ -1,6 +1,6 @@
 package day1
 
-object day1 {
+object Day1 {
   def main(args: Array[String]): Unit = {
     val ex = Seq(
       1721, 979, 366, 299, 675, 1456
