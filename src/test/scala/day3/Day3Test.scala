@@ -10,7 +10,6 @@ class Day3Test extends FunSuite{
   val fileName = "src/test/scala/day3/test-puzzle.txt"
   val s        = Source.fromFile(fileName)
   val list     = try s.getLines.toList finally s.close
-
   test("Day3.question1") {
     assertResult(7)  { question1(list) }
   }
