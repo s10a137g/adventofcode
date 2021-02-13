@@ -25,40 +25,31 @@ object Day3 {
 
     var pos   = 1
     var count = 0
-    for ((row, i) <- list.zipWithIndex) {
-      if (i != 0) {
+    list.zipWithIndex.foreach(v  =>
+      if (v._2 != 0) {
         pos += 3
-        val tree = if (pos % width == 0) row(width - 1) else row(pos % width - 1)
-//        println(i, pos, (pos % width), tree, row)
-        if (tree.toString == "#") {count += 1}
+        if(isTree(pos, width, v._1)) {count += 1}
       }
-    }
+    )
     count
   }
+
   def question2(list: Seq[String], right: Int, down: Int): Int = {
     val width  = list.head.length
 
     var pos   = 1
     var count = 0
-    for ((row, i) <- list.zipWithIndex) {
-      if (i > 0 && i % down == 0) {
+    list.zipWithIndex.foreach( v  =>
+      if (v._2 > 0 && v._2 % down == 0) {
         pos += right
-        val tree = if (pos % width == 0) row(width - 1) else row(pos % width - 1)
-        if (tree.toString == "#") {count += 1}
+        if (isTree(pos, width, v._1)) {count += 1}
       }
-    }
+    )
     count
   }
 
-  case class Puzzle(width: Int, height: Int) {
-    def isTree(): Unit = {
-
-    }
-  }
-
-  object Puzzle {
-    def apply(list: Seq[String]): Puzzle = {
-      Puzzle(list.head.length, list.length)
-    }
+  private def isTree(pos: Int, width: Int, row: String): Boolean = {
+    val tree = if (pos % width == 0) row(width - 1) else row(pos % width - 1)
+    tree.toString == "#"
   }
 }
