@@ -20,32 +20,13 @@ object Day3 {
     println("question2: "  + slopes.foldLeft(1L)((v1, v2) => v1 * question2(list, v2._1, v2._2)))
   }
 
-  def question1(list: Seq[String]): Int = {
-    val width  = list.head.length
-
-    var pos   = 1
-    var count = 0
-    list.zipWithIndex.foreach(v  =>
-      if (v._2 != 0) {
-        pos += 3
-        if(isTree(pos, width, v._1)) {count += 1}
-      }
-    )
-    count
-  }
+  def question1(list: Seq[String]): Int = list.zipWithIndex.count(v => isTree(1 + v._2 * 3, list.head.length, v._1))
 
   def question2(list: Seq[String], right: Int, down: Int): Int = {
-    val width  = list.head.length
-
-    var pos   = 1
-    var count = 0
-    list.zipWithIndex.foreach( v  =>
-      if (v._2 > 0 && v._2 % down == 0) {
-        pos += right
-        if (isTree(pos, width, v._1)) {count += 1}
-      }
-    )
-    count
+    list.zipWithIndex.count {
+      case v if v._2 % down != 0 => false
+      case v => isTree(1 + (v._2 / down) * right, list.head.length, v._1)
+    }
   }
 
   private def isTree(pos: Int, width: Int, row: String): Boolean = {
