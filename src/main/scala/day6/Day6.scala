@@ -4,7 +4,7 @@ import scala.io.{BufferedSource, Source}
 
 object Day6 {
 
-  lazy val f: String => Boolean = v => !v.matches("")
+  val f: String => Boolean = v => !v.matches("")
 
   def main(args: Array[String]): Unit = {
 
@@ -21,9 +21,11 @@ object Day6 {
   }
 
   def question2(list: Seq[String]): Int = {
+    val g: (Seq[Set[Char]] => Set[Char]) = (v => v.foldLeft(v.head)((v1, v2) => v1.intersect(v2)))
+
     val groupAnswerSet = split(list, f).map(_.map(_.toSet))
 
-    groupAnswerSet.map(v => v.foldLeft(v.head)((v1, v2) => v1.intersect(v2))).map(_.size).sum
+    groupAnswerSet.map(g).map(_.size).sum
   }
 
   /** private method */
@@ -39,8 +41,4 @@ object Day6 {
     val a = charSeq.map(_.flatten)
     a.map(_.distinct)
   }
-//  private def convertListToMap(list: Seq[String]): Seq[Map[String, String]] = {
-//    val f: String => Boolean = v => !v.matches("")
-//    val splitList = split(list, f)
-//  }
 }
