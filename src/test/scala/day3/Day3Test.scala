@@ -1,7 +1,7 @@
 package day3
 
 //import day3.Day3
-import day3.Day3.{Puzzle, question1, question2}
+import day3.Day3.{question1, question2}
 import org.scalatest.FunSuite
 
 import scala.io.Source
